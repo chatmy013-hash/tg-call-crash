@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>tg-call-crash panel</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { background:#111; color:#ddd; font-family:ui-monospace,Menlo,monospace; margin:20px; }
+    h1 { font-size:16px; color:#f80; }
+    .grid { display:grid; grid-template-columns: 220px 1fr; gap:20px; }
+    .card { background:#1a1a1a; border:1px solid #333; padding:12px; border-radius:6px; }
+    .stat { display:flex; justify-content:space-between; padding:2px 0; }
+    .stat b { color:#f80; }
+    button { background:#f80; color:#111; border:0; padding:6px 12px; cursor:pointer; margin-right:6px; }
+    button.stop { background:#c33; color:#fff; }
+    input { background:#222; color:#ddd; border:1px solid #444; width:60px; padding:3px; }
+    #log { height:180px; overflow:auto; font-size:11px; line-height:1.4; }
+    .k-ctl { color:#6cf; } .k-join { color:#8f8; } .k-leave { color:#fc8; } .k-error { color:#f66; }
+    canvas { max-height:220px; }
+  </style>
+</head>
+<body>
+  <h1>tg-call-crash // live panel</h1>
+
+  <div class="grid">
+    <div class="card">
+      <div class="stat"><span>state</span><b id="state">-</b></div>
+      <div class="stat"><span>cycles</span><b id="cycles">0</b></div>
+      <div class="stat"><span>joins</span><b id="join">0</b></div>
+      <div class="stat"><span>leaves</span><b id="leave">0</b></div>
+      <div class="stat"><span>errors</span><b id="errors">0</b></div>
+      <div class="stat"><span>media</span><b id="media">0</b></div>
+      <div class="stat"><span>workers</span><b id="workers">0</b></div>
+      <hr>
+      <div class="stat"><span>jitter_ms</span><input id="jitter_ms"></div>
+      <div class="stat"><span>cycles(max)</span><input id="cycles_in"></div>
+      <div class="stat"><span>cooldown_s</span><input id="cooldown_sec"></div>
+      <div class="stat"><span>rtp_hold_s</span><input id="rtp_hold_sec"></div>
+      <div style="margin-top:10px">
+        <button onclick="ctl('start')">START</button>
+        <button class="stop" onclick="ctl('stop')">STOP</button>
+        <button onclick="applyParams()">APPLY</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="card"><canvas id="chart"></canvas></div>
+      <div class="card" style="margin-top:20px">
+        <div style="color:#f80;margin-bottom:6px">event log</div>
+        <div id="log"></div>
+      </div>
+    </div>
+  </div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

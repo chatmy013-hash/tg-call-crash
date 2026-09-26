@@ -1,0 +1,19 @@
+api_id: 12345
+api_hash: "YOUR_API_HASH"
+
+target:
+  group: "https://t.me/your_test_group"
+
+waves:
+  jitter_ms: 80
+  rejoin_race: true
+  cycles: 0
+  cooldown_sec: 3
+  rtp_hold_sec: 8
+
+limits:
+  flood_wait_cap: 300
+  reconnect_delay: 3
+
+proxy_file: proxies.txt
+session_dir: sessions
